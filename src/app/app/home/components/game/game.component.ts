@@ -66,7 +66,7 @@ export class GameComponent implements OnInit {
   }
 
   showCard(index: number): void {
-    if (this.cardsCompleted.indexOf(index) === -1) {
+    if (this.visibleCards.indexOf(index) === -1 && this.cardsCompleted.indexOf(index) === -1) {
       if (this.visibleCards.length >= 2) {
         this.visibleCards = [index];
       } else {

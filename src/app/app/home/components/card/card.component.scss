@@ -1,11 +1,65 @@
-p {
-    margin: 0;
+@import 'src/app/app/app/variables.scss';
+
+:host {
+    perspective: 1000px;
 }
 
 .card {
-    background-color: rgba(0, 0, 0, 0.1);
-}
+    width: 11rem;
+    height: 8rem;
+    border-radius: map-get($map: $border-radius, $key: 3);
+    box-shadow: $box-shadow-4dp;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
+    cursor: pointer;
 
-.visible {
-    border: 1px solid green;
+    &__back-face,
+    &__front-face {
+        position: absolute;
+        backface-visibility: hidden;
+        background-color: #e5e5f7;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: map-get($map: $border-radius, $key: 3);
+        overflow: hidden;
+    }
+
+    &__back-face {
+        opacity: 0.8;
+        background-image: linear-gradient(135deg, #444cf7 25%, transparent 25%), linear-gradient(225deg, #444cf7 25%, transparent 25%), linear-gradient(45deg, #444cf7 25%, transparent 25%), linear-gradient(315deg, #444cf7 25%, #e5e5f7 25%);
+        background-position: 0.625rem 0, 0.625rem 0, 0 0, 0 0;
+        background-size: 0.625rem 0.625rem;
+        background-repeat: repeat;
+    }
+
+    &__front-face {
+        transform: rotateY(180deg);
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+    }
+
+    &__image {
+        background-size: cover;
+        flex-grow: 1;
+        padding: .5rem;
+        display: flex;
+        align-items: start;
+    }
+
+    &__title {
+        color: white;
+        font-size: 1rem;
+        margin: 0;
+        border-radius: $border-radius-rounded;
+        padding: .25rem .5rem;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    &--is-visible {
+        transform: rotateY(180deg);
+    }
 }

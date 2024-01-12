@@ -1,7 +1,12 @@
 @if (card) {
-<div class="card d-flex flex-column gap-2" [ngClass]="{visible: visible}">
-    <p>visible - {{visible}}</p>
-
-    <p>card - {{card.meta.name}}</p>
+<div class="card" [ngClass]="{'card--is-visible': visible}">
+    <div class="card__back-face"></div>
+    <div class="card__front-face">
+        @if (visible) {
+        <div class="card__image" [ngStyle]="getCardImage(card)">
+            <p class="card__title">{{card.meta.name}}</p>
+        </div>
+        }
+    </div>
 </div>
 }

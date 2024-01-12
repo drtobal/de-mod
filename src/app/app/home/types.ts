@@ -43,3 +43,7 @@ export type CardApiResponse = {
         total_pages: number;
     };
 };
+
+export type AnyObject = {
+    [prop: string]: string;
+}
