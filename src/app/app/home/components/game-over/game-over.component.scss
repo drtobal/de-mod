@@ -1,0 +1,9 @@
+@import 'src/app/app/app/variables.scss';
+
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: map-get($map: $spacers, $key: 4);
+    flex-direction: column;
+}

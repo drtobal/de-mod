@@ -2,4 +2,8 @@
 @defer (when !userName) {
 <app-welcome (onUserName)="onUserName($event)"></app-welcome>
 }
+} @else {
+@defer(when userName) {
+<app-game [userName]="userName"></app-game>
+}
 }

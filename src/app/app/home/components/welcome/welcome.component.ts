@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DEFAULT_USER_NAME } from '../../constants';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.scss'
+  styleUrl: './welcome.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeComponent {
   @Output() onUserName = new EventEmitter<string>();
@@ -24,7 +27,7 @@ export class WelcomeComponent {
 
   submit(): void {
     if (this.form.valid) {
-      this.onUserName.emit(this.form.controls.userName.value || 'Guest');
+      this.onUserName.emit(this.form.controls.userName.value || DEFAULT_USER_NAME);
     }
   }
 

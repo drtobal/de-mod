@@ -2,14 +2,17 @@ import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } 
 import { GameStorageService } from '../../services/game-storage/game-storage.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { WelcomeComponent } from '../welcome/welcome.component';
+import { GameComponent } from '../game/game.component';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule, WelcomeComponent],
+  imports: [CommonModule, WelcomeComponent, GameComponent],
   providers: [GameStorageService],
   templateUrl: './index.component.html',
-  styleUrl: './index.component.scss'
+  styleUrl: './index.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexComponent implements OnInit, OnDestroy {
   /** check if the code is running in server side or browser */
@@ -39,6 +42,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   onUserName(name: string): void {
     this.userName = name;
+    this.gameStorageService.saveUserName(this.userName);
     this.changeDetectorRef.detectChanges();
   }
 }

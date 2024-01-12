@@ -1,1 +1,7 @@
-<p>card works!</p>
+@if (card) {
+<div class="card d-flex flex-column gap-2" [ngClass]="{visible: visible}">
+    <p>visible - {{visible}}</p>
+
+    <p>card - {{card.meta.name}}</p>
+</div>
+}

@@ -1,1 +1,36 @@
-<p>game works!</p>
+<div class="container">
+    @if (!isGameOver) {
+    <div class="d-flex justify-content-center gap-3 gap-md-4">
+        <h1>{{userName}}</h1>
+        <div class="d-flex flex-column gap-2">
+            <p>Score:</p>
+            <p>Success: {{scoreSuccess}}</p>
+            <p>Error: {{scoreError}}</p>
+        </div>
+    </div>
+    }
+
+    @if (loading) {
+    <p>Loading...</p>
+    } @else {
+    @if (httpError) {
+    <p>{{httpError.message}}</p>
+    } @else {
+    @if (!isGameOver) {
+
+    <div class="d-flex gap-4 flex-wrap">
+        @for (card of cards; track card.meta.uuid; let index = $index) {
+        <app-card class="col" [card]="card" [visible]="isCardVisible(index)" (click)="showCard(index)"></app-card>
+        }
+    </div>
+
+    } @else {
+
+    @defer(when isGameOver) {
+    <app-game-over [userName]="userName" [scoreSuccess]="scoreSuccess" [scoreError]="scoreError"></app-game-over>
+    }
+
+    }
+    }
+    }
+</div>
