@@ -1,1 +1,5 @@
-<p>index works!</p>
+@if (!userName) {
+@defer (when !userName) {
+<app-welcome (onUserName)="onUserName($event)"></app-welcome>
+}
+}

@@ -1,1 +1,17 @@
-<p>welcome works!</p>
+<h1>Please pick a name</h1>
+<form [formGroup]="form" (ngSubmit)="submit()" (click)="form.markAllAsTouched()">
+    <div class="d-flex flex-column gap-1" [ngClass]="{invalid: form.controls.userName.status === 'INVALID'}">
+        <p class="m-0 form-label">User name</p>
+        <!--<mat-form-field appearance="outline">-->
+            <input type="text" matInput formControlName="userName" (blur)="inputBlur()" placeholder="Your name" />
+            @if (error('userName', 'required')) {
+                <!--<mat-error>Please insert a name</mat-error>-->
+            }
+            @if (error('userName', 'minLength')) {
+                <p>This name is too short</p>
+            }
+        <!--</mat-form-field>-->
+    </div>
+
+    <button [disabled]="!form.valid">Play Game!</button>
+</form>
