@@ -5,6 +5,7 @@ import { WelcomeComponent } from '../welcome/welcome.component';
 import { GameComponent } from '../game/game.component';
 import { ChangeDetectionStrategy } from '@angular/core';
 
+/** index component of game app, toggle between welcome view and game component, defer load of each */
 @Component({
   selector: 'app-index',
   standalone: true,
@@ -17,6 +18,7 @@ export class IndexComponent implements OnInit {
   /** check if the code is running in server side or browser */
   isBrowser: boolean = false;
 
+  /** current user game */
   userName: string | null = null;
 
   /** component constructor */
@@ -28,10 +30,12 @@ export class IndexComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
+  /** get the user from service */
   ngOnInit(): void {
     this.userName = this.gameStorageService.getUserName();
   }
 
+  /** update the user name when is updated from another child component */
   onUserName(name: string): void {
     this.userName = name;
     this.gameStorageService.saveUserName(this.userName);

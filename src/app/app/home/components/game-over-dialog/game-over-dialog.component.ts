@@ -5,6 +5,7 @@ import { GameOverDialogData, HighScore } from '../../types';
 import { NewGameButtonComponent } from '../new-game-button/new-game-button.component';
 import { GameStorageService } from '../../services/game-storage/game-storage.service';
 
+/** material dialog with game over information */
 @Component({
   selector: 'app-game-over-dialog',
   standalone: true,
@@ -13,8 +14,10 @@ import { GameStorageService } from '../../services/game-storage/game-storage.ser
   styleUrl: './game-over-dialog.component.scss'
 })
 export class GameOverDialogComponent {
+  /** list of past high scores */
   highScores: HighScore[] = [];
 
+  /** component constructor */
   constructor(
     private gameStorageService: GameStorageService,
     @Inject(MAT_DIALOG_DATA) readonly data: GameOverDialogData,

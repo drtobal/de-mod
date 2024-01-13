@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+/** just displays a loading div */
 @Component({
   selector: 'app-loading',
   standalone: true,

@@ -1,3 +1,4 @@
+/** card type retrieved from api, contract is unknown */
 export type Card = {
     meta: {
         name: string,
@@ -34,6 +35,7 @@ export type Card = {
     },
 };
 
+/** responde of api cards */
 export type CardApiResponse = {
     entries: Card[];
     meta: {
@@ -44,24 +46,29 @@ export type CardApiResponse = {
     };
 };
 
+/** object with free properties */
 export type AnyObject = {
     [prop: string]: string;
 }
 
+/** data to display game over dialog */
 export type GameOverDialogData = {
     userName: String;
     scoreSuccess: number;
     scoreError: number;
 };
 
+/** kinds of difficults */
 export type GameDifficulty = 'easy' | 'normal' | 'hard';
 
+/** configuration of each difficulty */
 export type DifficultDefinition = {
     key: GameDifficulty,
     label: string;
     cards: number;
 };
 
+/** high score record */
 export type HighScore = {
     name: string;
     score: number;

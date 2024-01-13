@@ -5,6 +5,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { DEFAULT_USER_NAME } from '../../constants';
 import { MatButtonModule } from '@angular/material/button';
 
+/** this component displays the welcome view for the game, requests the user name */
 @Component({
   selector: 'app-welcome',
   standalone: true,
@@ -14,8 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeComponent {
+  /** emits an event when the user name is setted */
   @Output() onUserName = new EventEmitter<string>();
 
+  /** reactive form to validate the name */
   form = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]),
   });
@@ -26,13 +29,14 @@ export class WelcomeComponent {
     return control ? control.errors?.[error] : true;
   }
 
+  /** submit the form if it is valid */
   submit(): void {
     if (this.form.valid) {
       this.onUserName.emit(this.form.controls.userName.value || DEFAULT_USER_NAME);
     }
   }
 
-  /** when input is blurred, save data in current session and triggers validators */
+  /** when input is blurred display the validations if they are not displayed */
   inputBlur(): void {
     this.form.markAllAsTouched();
   }
