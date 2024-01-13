@@ -4,6 +4,6 @@
 }
 } @else {
 @defer(when userName) {
-<app-game [userName]="userName"></app-game>
+<app-game [userName]="userName" (resetName)="onUserName('')"></app-game>
 }
 }

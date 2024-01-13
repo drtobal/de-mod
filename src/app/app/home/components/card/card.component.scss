@@ -5,8 +5,8 @@
 }
 
 .card {
-    width: 11rem;
-    height: 14rem;
+    width: 7rem;
+    height: 9rem;
     border-radius: map-get($map: $border-radius, $key: 3);
     box-shadow: $box-shadow-4dp;
     transition: transform 0.8s;
@@ -62,5 +62,12 @@
 
     &--is-visible {
         transform: rotateY(180deg);
+    }
+}
+
+@media (min-width: map-get($map: $grid-breakpoints, $key: md)) {
+    .card {
+        width: 11rem;
+        height: 14rem;
     }
 }

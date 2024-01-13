@@ -3,3 +3,8 @@
 ::ng-deep {
     @include mat.core-theme(mat.$indigo-palette);
 }
+
+
+:host {
+    margin-bottom: auto;
+}

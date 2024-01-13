@@ -6,4 +6,8 @@ export const routes: Routes = [
         pathMatch: 'full',
         loadComponent: () => import('./../app/app/home/components/index/index.component').then(c => c.IndexComponent),
     },
+    {
+        path: '**',
+        redirectTo: '',
+    }
 ];

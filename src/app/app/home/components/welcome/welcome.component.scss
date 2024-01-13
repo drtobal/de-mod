@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+@import 'src/app/app/app/variables.scss';
+
+::ng-deep {
+    @include mat.button-theme(mat.$indigo-palette);
+}
+
+.form-container {
+    max-width: 30rem;
+}
+
+.input {
+    padding: 0.5rem;
+    border-radius: 999rem;
+    border: none;
+    background-color: rgba(0, 0, 0, .1);
+
+    &__error {
+        color: $error-text;
+        margin: 0;
+        font-size: 0.75rem;
+    }
+}

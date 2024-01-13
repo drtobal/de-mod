@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { OnDestroy, OnInit } from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Component } from '@angular/core';
 import { GameApiService } from '../../services/game-api/game-api.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -24,6 +24,8 @@ import { Subscription } from 'rxjs';
 })
 export class GameComponent implements OnInit, OnDestroy {
   @Input() userName: string = DEFAULT_USER_NAME;
+
+  @Output() resetName = new EventEmitter();
 
   loading: boolean = true;
 
@@ -54,10 +56,6 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadCards();
     this.newGameSub = this.gameStorageService.newGame.subscribe(this.loadCards.bind(this));
-    setTimeout(() => {
-      this.isGameOver = true;
-      this.changeDetectorRef.detectChanges();
-    }, 200);
   }
 
   ngOnDestroy(): void {
