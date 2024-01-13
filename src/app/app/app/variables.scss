@@ -24,3 +24,50 @@ $border-radius: (
 $border-radius-rounded: 9999rem;
 
 $box-shadow-4dp: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+$box-shadow-8dp: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+
+$deceleration-curve-timing-function: cubic-bezier(0, 0, 0.2, 1) !default;
+$standard-curve-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$acceleration-curve-timing-function: cubic-bezier(0.4, 0, 1, 1) !default;
+$sharp-curve-timing-function: cubic-bezier(0.4, 0, 0.6, 1) !default;
+
+$transition-duration-complex: 375ms;
+$transition-duration-entering: 225ms;
+$transition-duration-exiting: 195ms;
+
+@function transition_enter($name, $duration: $transition-duration-entering, $delay: 0ms) {
+    @return $name $duration $delay $deceleration-curve-timing-function;
+}
+
+@function transition_exit-permanent($name, $duration: $transition-duration-exiting, $delay: 0ms) {
+    @return $name $duration $delay $acceleration-curve-timing-function;
+}
+
+@function transition_exit-temporary($name, $duration: $transition-duration-exiting, $delay: 0ms) {
+    @return $name $duration $delay $sharp-curve-timing-function;
+}
+
+@function transition_standard($name, $duration: $transition-duration-complex, $delay: 0ms) {
+    @return $name $duration $delay $standard-curve-timing-function;
+}
+
+$bg-success: #e9f5da;
+$bg-error: #ffe1d5;
+
+@mixin badge-value {
+    border-radius: $border-radius-rounded;
+    padding-top: map-get($map: $spacers, $key: 2);
+    padding-bottom: map-get($map: $spacers, $key: 2);
+    padding-left: map-get($map: $spacers, $key: 4);
+    padding-right: map-get($map: $spacers, $key: 4);
+}
+
+@mixin badge-success {
+    background-color: $bg-success;
+    @include badge-value;
+}
+
+@mixin badge-error {
+    background-color: $bg-error;
+    @include badge-value;
+}

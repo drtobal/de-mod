@@ -1,9 +1,10 @@
-<h1>Congratulations {{userName}}!</h1>
+<div class="dialog d-flex flex-column gap-2 p-4">
+    <h1 class="dialog__title">Congratulations {{userName}}!</h1>
+    <h2 class="dialog__caption">Your score:</h2>
+    <div class="d-flex gap-2 justify-content-center">
+        <p class="dialog__value-success">Success: {{scoreSuccess}}</p>
+        <p class="dialog__value-error">Error: {{scoreError}}</p>
+    </div>
 
-<h2>Your score:</h2>
-
-<p>Success: {{scoreSuccess}}</p>
-
-<p>Error: {{scoreError}}</p>
-
-<p>Total: {{scoreSuccess - scoreError}}</p>
+    <p class="dialog__value-total">Total: {{scoreSuccess - scoreError}}</p>
+</div>

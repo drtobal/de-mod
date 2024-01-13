@@ -6,7 +6,7 @@
 
 .card {
     width: 11rem;
-    height: 8rem;
+    height: 14rem;
     border-radius: map-get($map: $border-radius, $key: 3);
     box-shadow: $box-shadow-4dp;
     transition: transform 0.8s;
@@ -48,6 +48,7 @@
         padding: .5rem;
         display: flex;
         align-items: start;
+        background-position: center center;
     }
 
     &__title {
