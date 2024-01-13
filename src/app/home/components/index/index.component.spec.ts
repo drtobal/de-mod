@@ -20,4 +20,12 @@ describe('IndexComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set the user name and emit to service', () => {
+    component.userName = '';
+    component['gameStorageService'].saveUserName = jasmine.createSpy();
+    component.onUserName('demo');
+    expect(component.userName).toBe('demo');
+    expect(component['gameStorageService'].saveUserName).toHaveBeenCalledOnceWith('demo');
+  });
 });
