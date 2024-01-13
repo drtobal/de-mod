@@ -59,7 +59,7 @@ export class GameStorageService {
   saveHighScore(score: HighScore): void {
     if (this.utilService.hasWindow()) {
       let scores = this.getHighScores();
-      if (scores.find(s => s.score < score.score)) { //only save if it is higher
+      if (scores.find(s => s.score < score.score) || scores.length <= MAX_HIGHSCORES) { //only save if it is higher
         scores.push(score);
         scores = scores.slice(-MAX_HIGHSCORES);
         scores = scores.sort((a, b) => {
