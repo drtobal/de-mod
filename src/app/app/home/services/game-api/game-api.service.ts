@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Card, CardApiResponse } from '../../types';
+import { Card, CardApiResponse, GameDifficulty } from '../../types';
 import { Observable } from 'rxjs';
-import { API_CARDS } from '../../constants';
+import { API_CARDS, DEFAULT_CARDS, DEFAULT_DIFFICULT, GAME_DIFFICULTIES } from '../../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,12 @@ export class GameApiService {
     private http: HttpClient,
   ) { /* do nothing */ }
 
-  getCards(): Observable<CardApiResponse> {
-    return this.http.get<CardApiResponse>(API_CARDS);
+  getCards(difficult: GameDifficulty = DEFAULT_DIFFICULT): Observable<CardApiResponse> {
+    // per_page=20
+    const params = new URLSearchParams();
+    const difficultConfig = GAME_DIFFICULTIES.find(d => d.key === difficult);
+    params.set('per_page', difficultConfig?.cards.toString() || DEFAULT_CARDS.toString());
+    return this.http.get<CardApiResponse>(`${API_CARDS}?${params.toString()}`);
   }
 
   generateCardsGame(cards: Card[]): Card[] {

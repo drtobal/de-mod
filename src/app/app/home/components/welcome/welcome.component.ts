@@ -16,7 +16,7 @@ export class WelcomeComponent {
   @Output() onUserName = new EventEmitter<string>();
 
   form = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]),
   });
 
   /** displays an error */

@@ -1,25 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { OnInit } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { GameApiService } from '../../services/game-api/game-api.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Input } from '@angular/core';
-import { DEFAULT_USER_NAME } from '../../constants';
+import { DEFAULT_DIFFICULT, DEFAULT_USER_NAME, gameDifficulties } from '../../constants';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Card } from '../../types';
+import { Card, GameDifficulty } from '../../types';
 import { CardComponent } from '../card/card.component';
 import { GameOverComponent } from '../game-over/game-over.component';
+import { NewGameButtonComponent } from '../new-game-button/new-game-button.component';
+import { GameStorageService } from '../../services/game-storage/game-storage.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, CardComponent, GameOverComponent],
+  imports: [CommonModule, CardComponent, GameOverComponent, NewGameButtonComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   @Input() userName: string = DEFAULT_USER_NAME;
 
   loading: boolean = true;
@@ -38,36 +41,49 @@ export class GameComponent implements OnInit {
 
   isGameOver: boolean = false;
 
+  difficult: GameDifficulty = DEFAULT_DIFFICULT;
+
+  newGameSub?: Subscription;
+
   constructor(
+    private gameStorageService: GameStorageService,
     private gameApiService: GameApiService,
     private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
     this.loadCards();
-    setTimeout(() => {
-      this.isGameOver = true;
-      this.changeDetectorRef.detectChanges();
-    }, 3000);
+    this.newGameSub = this.gameStorageService.newGame.subscribe(this.loadCards.bind(this));
   }
 
-  loadCards(): void {
+  ngOnDestroy(): void {
+    this.newGameSub?.unsubscribe();
+  }
+
+  loadCards(difficult: GameDifficulty = DEFAULT_DIFFICULT): void {
+    this.resetGame();
     this.loading = true;
-    this.httpError = null;
     this.changeDetectorRef.detectChanges();
-    this.gameApiService.getCards().subscribe({
+    this.gameApiService.getCards(difficult).subscribe({
       next: data => this.cards = this.gameApiService.generateCardsGame(data.entries),
       error: error => this.httpError = error,
     }).add(() => {
       this.loading = false;
-      console.log(JSON.stringify(this.cards));
       this.changeDetectorRef.detectChanges();
     });
   }
 
+  resetGame(): void {
+    this.isGameOver = false;
+    this.scoreSuccess = 0;
+    this.scoreError = 0;
+    this.visibleCards = [];
+    this.cardsCompleted = [];
+    this.httpError = null;
+  }
+
   isCardVisible(index: number): boolean {
-    // return this.visibleCards.indexOf(index) > -1 || this.cardsCompleted.indexOf(index) > -1;
-    return true;
+    return this.visibleCards.indexOf(index) > -1 || this.cardsCompleted.indexOf(index) > -1;
   }
 
   showCard(index: number): void {

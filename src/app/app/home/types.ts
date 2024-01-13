@@ -53,3 +53,11 @@ export type GameOverDialogData = {
     scoreSuccess: number;
     scoreError: number;
 };
+
+export type GameDifficulty = 'easy' | 'normal' | 'hard';
+
+export type DifficultDefinition = {
+    key: GameDifficulty,
+    label: string;
+    cards: number;
+};

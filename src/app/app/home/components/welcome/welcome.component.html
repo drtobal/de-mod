@@ -10,6 +10,9 @@
             @if (error('userName', 'minLength')) {
                 <p>This name is too short</p>
             }
+            @if (error('userName', 'maxLength')) {
+                <p>This name is too long</p>
+            }
         <!--</mat-form-field>-->
     </div>
 

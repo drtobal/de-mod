@@ -1,33 +1,24 @@
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../../app/services/util/util.service';
 import { USER_NAME_STORAGE } from '../../constants';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { GameDifficulty } from '../../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameStorageService {
 
-  private _userName = new BehaviorSubject<string>('');
-
-  private _errorScore = new BehaviorSubject<number>(0);
-
-  private _successScore = new BehaviorSubject<number>(0);
+  private _newGame = new Subject<GameDifficulty>();
 
   constructor(
     private utilService: UtilService,
-  ) { /* do nothing */ }
-
-  get userName(): BehaviorSubject<string> {
-    return this._userName;
+  ) {
+    console.log('constructed');
   }
 
-  get errorScore(): BehaviorSubject<number> {
-    return this._errorScore;
-  }
-
-  get successScore(): BehaviorSubject<number> {
-    return this._successScore;
+  get newGame(): Subject<GameDifficulty> {
+    return this._newGame;
   }
 
   getUserName(): string | null {
