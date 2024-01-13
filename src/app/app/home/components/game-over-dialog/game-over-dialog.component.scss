@@ -35,3 +35,9 @@
         padding-bottom: map-get($map: $spacers, $key: 2);
     }
 }
+
+.highscores {
+    &__score {
+        margin: 0;
+    }
+}

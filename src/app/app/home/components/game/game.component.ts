@@ -69,6 +69,10 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadCards();
     this.newGameSub = this.gameStorageService.newGame.subscribe(this.loadCards.bind(this));
+    setTimeout(() => {
+      this.isGameOver = true;
+      this.changeDetectorRef.detectChanges();
+    }, 2000);
   }
 
   ngOnDestroy(): void {
@@ -131,6 +135,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
   checkIsGameOver(): void {
     this.isGameOver = this.cardsCompleted.length === this.cards.length;
+    if (this.isGameOver) {
+      this.gameStorageService.saveHighScore({
+        name: this.userName,
+        score: this.scoreSuccess - this.scoreError,
+      });
+    }
   }
 
   getDifficultyLabel(difficulty: GameDifficulty): string {

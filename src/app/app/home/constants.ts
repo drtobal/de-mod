@@ -2,6 +2,10 @@ import { DifficultDefinition } from "./types";
 
 export const USER_NAME_STORAGE = 'USER_NAME_LS';
 
+export const HIGHSCORES_STORAGE = 'HIGHSCORES_LS';
+
+export const MAX_HIGHSCORES = 5;
+
 export const API_CARDS = 'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries';
 
 export const DEFAULT_USER_NAME = 'Guest';

@@ -8,5 +8,17 @@
 
     <p class="dialog__value-total">Total: {{data.scoreSuccess - data.scoreError}}</p>
 
+    @if (highScores.length > 0) {
+    <div class="highscores">
+        <p class="highscores__title">Highscores</p>
+        @for (highScore of highScores; track $index) {
+        <div class="d-flex gap-4">
+            <p class="highscores__score me-auto">{{highScore.name}}</p>
+            <p class="highscores__score">{{highScore.score | number : '1.0-0'}}</p>
+        </div>
+        }
+    </div>
+    }
+
     <app-new-game-button mat-dialog-close></app-new-game-button>
 </div>

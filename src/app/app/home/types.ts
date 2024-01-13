@@ -61,3 +61,8 @@ export type DifficultDefinition = {
     label: string;
     cards: number;
 };
+
+export type HighScore = {
+    name: string;
+    score: number;
+};
