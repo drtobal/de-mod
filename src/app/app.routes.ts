@@ -4,7 +4,7 @@ export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        loadComponent: () => import('./../app/app/home/components/index/index.component').then(c => c.IndexComponent),
+        loadComponent: () => import('./../app/home/components/index/index.component').then(c => c.IndexComponent),
     },
     {
         path: '**',
