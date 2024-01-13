@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Congratulations {{data.userName}}!</h1>
+<div mat-dialog-content class="dialog d-flex flex-column gap-2 p-4">
+    <h2 class="dialog__caption">Your score:</h2>
+    <div class="d-flex gap-2 justify-content-center">
+        <p class="dialog__value-success">Success: {{data.scoreSuccess}}</p>
+        <p class="dialog__value-error">Error: {{data.scoreError}}</p>
+    </div>
+
+    <p class="dialog__value-total">Total: {{data.scoreSuccess - data.scoreError}}</p>
+</div>

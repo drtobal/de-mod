@@ -47,3 +47,9 @@ export type CardApiResponse = {
 export type AnyObject = {
     [prop: string]: string;
 }
+
+export type GameOverDialogData = {
+    userName: String;
+    scoreSuccess: number;
+    scoreError: number;
+};

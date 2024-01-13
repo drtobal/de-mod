@@ -1,47 +1,5 @@
-@import 'src/app/app/app/variables.scss';
+@use '@angular/material' as mat;
 
-:host {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: map-get($map: $spacers, $key: 4);
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-}
-
-.dialog {
-    background-color: white;
-    border-radius: map-get($map: $border-radius, $key: 4);
-    box-shadow: $box-shadow-8dp;
-    text-align: center;
-
-    &__caption,
-    &__value-success,
-    &__value-error,
-    &__value-total {
-        margin: 0;
-    }
-
-    &__title {
-
-    }
-
-    &__caption {
-
-    }
-
-    &__value-success {
-        @include badge-success;
-    }
-
-    &__value-error {
-        @include badge-error;
-    }
-
-    &__value-total {
-        font-size: 2rem;
-        padding-top: map-get($map: $spacers, $key: 2);
-        padding-bottom: map-get($map: $spacers, $key: 2);
-    }
+::ng-deep {
+    @include mat.dialog-theme(mat.$indigo-palette);
 }

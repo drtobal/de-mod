@@ -25,12 +25,9 @@
 
 
     @if (isGameOver) {
-    <div class="game-over" [@fadeIn]>
-        @defer(when isGameOver) {
-        <app-game-over [userName]="userName" [scoreSuccess]="scoreSuccess"
-            [scoreError]="scoreError"></app-game-over>
-        }
-    </div>
+    @defer(when isGameOver) {
+    <app-game-over [userName]="userName" [scoreSuccess]="scoreSuccess" [scoreError]="scoreError"></app-game-over>
+    }
     }
 
     }

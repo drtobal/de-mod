@@ -10,12 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Card } from '../../types';
 import { CardComponent } from '../card/card.component';
 import { GameOverComponent } from '../game-over/game-over.component';
-import { animate, style, transition, trigger } from '@angular/animations';
-import { TRANSITION_ENTER } from '../../../app/constants';
-
-const ANIMATION_FADE_IN = style({ opacity: 0 });
-
-const ANIMATION_FADE_OUT = style({ opacity: 1 });
 
 @Component({
   selector: 'app-game',
@@ -24,11 +18,6 @@ const ANIMATION_FADE_OUT = style({ opacity: 1 });
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [ANIMATION_FADE_IN, animate(TRANSITION_ENTER, ANIMATION_FADE_OUT)]),
-    ]),
-  ],
 })
 export class GameComponent implements OnInit {
   @Input() userName: string = DEFAULT_USER_NAME;
