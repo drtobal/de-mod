@@ -5,7 +5,7 @@ import { GameApiService } from '../../services/game-api/game-api.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Input } from '@angular/core';
-import { DEFAULT_DIFFICULT, DEFAULT_USER_NAME, gameDifficulties } from '../../constants';
+import { DEFAULT_DIFFICULT, DEFAULT_USER_NAME, GAME_DIFFICULTIES } from '../../constants';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Card, GameDifficulty } from '../../types';
 import { CardComponent } from '../card/card.component';
@@ -41,7 +41,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   isGameOver: boolean = false;
 
-  difficult: GameDifficulty = DEFAULT_DIFFICULT;
+  difficulty: GameDifficulty = DEFAULT_DIFFICULT;
 
   newGameSub?: Subscription;
 
@@ -54,17 +54,22 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadCards();
     this.newGameSub = this.gameStorageService.newGame.subscribe(this.loadCards.bind(this));
+    setTimeout(() => {
+      this.isGameOver = true;
+      this.changeDetectorRef.detectChanges();
+    }, 200);
   }
 
   ngOnDestroy(): void {
     this.newGameSub?.unsubscribe();
   }
 
-  loadCards(difficult: GameDifficulty = DEFAULT_DIFFICULT): void {
+  loadCards(difficulty: GameDifficulty = DEFAULT_DIFFICULT): void {
     this.resetGame();
     this.loading = true;
+    this.difficulty = difficulty;
     this.changeDetectorRef.detectChanges();
-    this.gameApiService.getCards(difficult).subscribe({
+    this.gameApiService.getCards(difficulty).subscribe({
       next: data => this.cards = this.gameApiService.generateCardsGame(data.entries),
       error: error => this.httpError = error,
     }).add(() => {
@@ -115,5 +120,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   checkIsGameOver(): void {
     this.isGameOver = this.cardsCompleted.length === this.cards.length;
+  }
+
+  getDifficultyLabel(difficulty: GameDifficulty): string {
+    const definition = GAME_DIFFICULTIES.find(f => f.key == difficulty);
+    return definition ? definition.label : DEFAULT_DIFFICULT;
   }
 }

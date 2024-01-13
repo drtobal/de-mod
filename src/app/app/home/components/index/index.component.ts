@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-index',
   standalone: true,
   imports: [CommonModule, WelcomeComponent, GameComponent],
-  providers: [GameStorageService],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -27,4 +27,9 @@
     &__title {
         margin: 0;
     }
+
+    &__difficulty {
+        @include badge-value;
+        background-color: $bg-primary;
+    }
 }

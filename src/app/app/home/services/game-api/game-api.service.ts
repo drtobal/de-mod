@@ -13,10 +13,10 @@ export class GameApiService {
     private http: HttpClient,
   ) { /* do nothing */ }
 
-  getCards(difficult: GameDifficulty = DEFAULT_DIFFICULT): Observable<CardApiResponse> {
+  getCards(difficulty: GameDifficulty = DEFAULT_DIFFICULT): Observable<CardApiResponse> {
     // per_page=20
     const params = new URLSearchParams();
-    const difficultConfig = GAME_DIFFICULTIES.find(d => d.key === difficult);
+    const difficultConfig = GAME_DIFFICULTIES.find(d => d.key === difficulty);
     params.set('per_page', difficultConfig?.cards.toString() || DEFAULT_CARDS.toString());
     return this.http.get<CardApiResponse>(`${API_CARDS}?${params.toString()}`);
   }

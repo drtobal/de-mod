@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { GAME_DIFFICULTIES } from '../../constants';
 import { GameDifficulty } from '../../types';
+import { GameStorageService } from '../../services/game-storage/game-storage.service';
 
 @Component({
   selector: 'app-new-game-dialog',
@@ -17,10 +18,11 @@ export class NewGameDialogComponent {
   gameDifficulties = GAME_DIFFICULTIES;
 
   constructor(
+    private gameStorageService: GameStorageService,
     private matDialogRef: MatDialogRef<NewGameDialogComponent>,
   ) { }
 
   newGame(difficult: GameDifficulty): void {
-    this.matDialogRef.close(difficult);
+    this.gameStorageService.newGame.next(difficult);
   }
 }
