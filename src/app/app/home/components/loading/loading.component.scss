@@ -1,0 +1,27 @@
+@import 'src/app/app/app/variables.scss';
+
+:host {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.card {
+    width: 11rem;
+    height: 14rem;
+    border-radius: map-get($map: $border-radius, $key: 3);
+    animation: loading-card 6s linear infinite;
+    z-index: 5;
+    @include card-back-face;
+}
+
+@keyframes loading-card {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

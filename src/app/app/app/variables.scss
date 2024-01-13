@@ -75,11 +75,19 @@ $error-text: #ba1a1a;
     @include badge-value;
 }
 
+@mixin card-back-face {
+    opacity: 0.8;
+    background-image: linear-gradient(135deg, #444cf7 25%, transparent 25%), linear-gradient(225deg, #444cf7 25%, transparent 25%), linear-gradient(45deg, #444cf7 25%, transparent 25%), linear-gradient(315deg, #444cf7 25%, #e5e5f7 25%);
+    background-position: 0.625rem 0, 0.625rem 0, 0 0, 0 0;
+    background-size: 0.625rem 0.625rem;
+    background-repeat: repeat;
+}
+
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px,
-) !default;
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    ) !default;

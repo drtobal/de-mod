@@ -15,13 +15,13 @@
 
 <div class="container py-5">
     @if (loading) {
-    <p>Loading...</p>
+    <app-loading [@fade]></app-loading>
     } @else {
     @if (httpError) {
-    <p>{{httpError.message}}</p>
+    <p class="error-text" [@fade]>{{httpError.message}}</p>
     } @else {
 
-    <div class="d-flex gap-4 flex-wrap">
+    <div class="d-flex gap-4 flex-wrap" [@fade]>
         @for (card of cards; track card.meta.uuid; let index = $index) {
         <app-card [card]="card" [visible]="isCardVisible(index)" (click)="showCard(index)"></app-card>
         }

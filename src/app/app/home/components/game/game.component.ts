@@ -13,14 +13,27 @@ import { GameOverComponent } from '../game-over/game-over.component';
 import { NewGameButtonComponent } from '../new-game-button/new-game-button.component';
 import { GameStorageService } from '../../services/game-storage/game-storage.service';
 import { Subscription } from 'rxjs';
+import { LoadingComponent } from '../loading/loading.component';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { TRANSITION_ENTER, TRANSITION_EXIT_PERMANENT } from '../../../app/constants';
+
+const FADE_IN = style({ opacity: 0 });
+
+const FADE_OUT = style({ opacity: 1 });
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, CardComponent, GameOverComponent, NewGameButtonComponent],
+  imports: [CommonModule, CardComponent, GameOverComponent, NewGameButtonComponent, LoadingComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fade', [
+      transition(':enter', [FADE_IN, animate(TRANSITION_ENTER, FADE_OUT)]),
+      transition(':leave', [FADE_OUT, animate(TRANSITION_EXIT_PERMANENT, FADE_IN)]),
+    ]),
+  ],
 })
 export class GameComponent implements OnInit, OnDestroy {
   @Input() userName: string = DEFAULT_USER_NAME;
