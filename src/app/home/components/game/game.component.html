@@ -23,7 +23,8 @@
 
     <div class="d-flex gap-4 flex-wrap" [@cards]="cards.length">
         @for (card of cards; track card.meta.uuid; let index = $index) {
-        <app-card [card]="card" [visible]="isCardVisible(index)" (click)="showCard(index)"></app-card>
+        <app-card [card]="card" [visible]="isCardVisible(index)" [completed]="isCardCompleted(index)"
+            (click)="showCard(index)"></app-card>
         }
     </div>
 

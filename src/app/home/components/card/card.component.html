@@ -1,5 +1,5 @@
 @if (card) {
-<div class="card" [ngClass]="{'card--is-visible': visible}">
+<div class="card" [ngClass]="{'card--is-visible': visible, 'card--is-completed': completed}">
     <div class="card__back-face"></div>
     <div class="card__front-face">
         @if (visible) {
@@ -8,5 +8,13 @@
         </div>
         }
     </div>
+
+    @if (completed) {
+    <div class="completed">
+        <div class="completed__inner">
+            <div class="completed__ripple"></div>
+        </div>
+    </div>
+    }
 </div>
 }

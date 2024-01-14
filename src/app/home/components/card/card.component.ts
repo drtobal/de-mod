@@ -26,6 +26,9 @@ export class CardComponent {
   /** check the side displayed */
   @Input() visible: boolean = false;
 
+  /** display completed animation */
+  @Input() completed: boolean = false;
+
   /** get css style to show the image of the card */
   getCardImage(card: Card): AnyObject {
     return { 'background-image': `url(${card.fields.image.url})` };

@@ -9,7 +9,7 @@
     height: 9rem;
     border-radius: map-get($map: $border-radius, $key: 3);
     box-shadow: $box-shadow-4dp;
-    transition: transform 0.8s;
+    transition: transform $transition-duration-complex $standard-curve-timing-function;
     transform-style: preserve-3d;
     position: relative;
     cursor: pointer;
@@ -58,6 +58,84 @@
 
     &--is-visible {
         transform: rotateY(180deg);
+    }
+
+    &--is-completed {
+        animation: game-card-completed .6s cubic-bezier(0.215, 0.61, 0.355, 1) $transition-duration-complex;
+    }
+}
+
+.completed {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &__inner {
+        border-radius: map-get($map: $border-radius, $key: 3);
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__ripple {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        transform: translateY(-50%) translateX(-50%);
+        border-radius: 50%;
+        background-color: $ripple-succes;
+        animation: game-card-completed-ripple .6s $deceleration-curve-timing-function $transition-duration-complex;
+    }
+}
+
+@keyframes game-card-completed-ripple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 25rem;
+        height: 25rem;
+        opacity: 0;
+    }
+}
+
+@keyframes game-card-completed {
+    from {
+        transform: scale3d(1, 1, 1) rotateY(180deg);
+    }
+
+    10%,
+    20% {
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg) rotateY(180deg);
+    }
+
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg) rotateY(180deg);
+    }
+
+    40%,
+    60%,
+    80% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg) rotateY(180deg);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1) rotateY(180deg);
     }
 }
 

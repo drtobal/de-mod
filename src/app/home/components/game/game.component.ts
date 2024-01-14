@@ -126,7 +126,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
   /** check if this card is folded up */
   isCardVisible(index: number): boolean {
-    return this.visibleCards.indexOf(index) > -1 || this.cardsCompleted.indexOf(index) > -1;
+    return this.visibleCards.indexOf(index) > -1 || this.isCardCompleted(index);
+  }
+
+  /** returns if this card is completed or not */
+  isCardCompleted(index: number): boolean {
+    return this.cardsCompleted.indexOf(index) > -1;
   }
 
   /** display a requested card if it can */
