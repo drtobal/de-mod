@@ -1,5 +1,6 @@
 @if (card) {
-<div class="card" [ngClass]="{'card--is-visible': visible, 'card--is-completed': completed}">
+<div class="card"
+    [ngClass]="{'card--is-visible': visible, 'card--is-completed': completed, 'card--is-dancing': isGameOver}">
     <div class="card__back-face"></div>
     <div class="card__front-face">
         @if (visible) {

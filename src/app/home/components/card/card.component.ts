@@ -29,6 +29,9 @@ export class CardComponent {
   /** display completed animation */
   @Input() completed: boolean = false;
 
+  /** display card as game completed */
+  @Input() isGameOver: boolean = false;
+
   /** get css style to show the image of the card */
   getCardImage(card: Card): AnyObject {
     return { 'background-image': `url(${card.fields.image.url})` };

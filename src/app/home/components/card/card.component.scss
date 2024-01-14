@@ -63,6 +63,10 @@
     &--is-completed {
         animation: game-card-completed .6s cubic-bezier(0.215, 0.61, 0.355, 1) $transition-duration-complex;
     }
+
+    &--is-dancing {
+        animation: game-card-dancing 1.5s ease-in-out 1s infinite;
+    }
 }
 
 .completed {
@@ -108,6 +112,18 @@
         width: 25rem;
         height: 25rem;
         opacity: 0;
+    }
+}
+
+@keyframes game-card-dancing {
+    0% {
+        transform: rotateZ(-6deg) rotateY(180deg);
+    }
+    50% {
+        transform: rotateZ(6deg) rotateY(180deg);
+    }
+    100% {
+        transform: rotateZ(-6deg) rotateY(180deg);
     }
 }
 
