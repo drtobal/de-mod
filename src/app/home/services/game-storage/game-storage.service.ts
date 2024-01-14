@@ -67,7 +67,7 @@ export class GameStorageService {
 
   /** add and sort higscores, false it the scores array is unchanged */
   addHighScore(scores: HighScore[], score: HighScore, maxItems: number = MAX_HIGHSCORES): HighScore[] | false {
-    if (scores.length <= maxItems || scores.find(s => s.score <= score.score)) { // only save if it is higher
+    if (scores.length < maxItems || scores.find(s => s.score <= score.score)) { // only save if it is higher
       scores.push(score);
       scores = scores.sort((a, b) => { // sort by score value, higher is first
         if (a.score < b.score) return 1;

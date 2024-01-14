@@ -16,18 +16,18 @@ describe('GameStorageService', () => {
 
   it('should add highscore to array in order', () => {
     //add only
-    expect(service.addHighScore([], { name: '', score: 0 })).toEqual([{ name: '', score: 0 }]);
+    expect(service.addHighScore([], { name: '', score: -20 }, 5)).toEqual([{ name: '', score: -20 }]);
 
     // add second, same score
-    expect(service.addHighScore([{ name: 'a', score: 0 }], { name: 'b', score: 0 }))
+    expect(service.addHighScore([{ name: 'a', score: 0 }], { name: 'b', score: 0 }, 5))
       .toEqual([{ name: 'a', score: 0 }, { name: 'b', score: 0 }]);
 
     // add second
-    expect(service.addHighScore([{ name: 'a', score: -10 }], { name: 'b', score: -20 }))
+    expect(service.addHighScore([{ name: 'a', score: -10 }], { name: 'b', score: -20 }, 5))
       .toEqual([{ name: 'a', score: -10 }, { name: 'b', score: -20 }]);
 
     // add first
-    expect(service.addHighScore([{ name: 'a', score: -10 }], { name: 'b', score: 20 }))
+    expect(service.addHighScore([{ name: 'a', score: -10 }], { name: 'b', score: 20 }, 5))
       .toEqual([{ name: 'b', score: 20 }, { name: 'a', score: -10 }]);
 
     // list full, cant add
@@ -36,11 +36,7 @@ describe('GameStorageService', () => {
       { name: 'b', score: -10 },
       { name: 'c', score: -10 },
     ], { name: 'd', score: -20 }, 3))
-      .toEqual([
-        { name: 'a', score: -10 },
-        { name: 'b', score: -10 },
-        { name: 'c', score: -10 },
-      ]);
+      .toBeFalse();
 
     // list full, add 2nd place
     expect(service.addHighScore([
@@ -64,6 +60,17 @@ describe('GameStorageService', () => {
         { name: 'd', score: 80 },
         { name: 'a', score: 40 },
         { name: 'b', score: 30 },
+      ]);
+
+    // list full, add first place, more items than allowed
+    expect(service.addHighScore([
+      { name: 'a', score: 40 },
+      { name: 'b', score: 30 },
+      { name: 'c', score: 20 },
+    ], { name: 'd', score: 80 }, 2))
+      .toEqual([
+        { name: 'd', score: 80 },
+        { name: 'a', score: 40 },
       ]);
   });
 });
