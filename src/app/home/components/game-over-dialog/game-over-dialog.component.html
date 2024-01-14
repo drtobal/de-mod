@@ -6,7 +6,9 @@
         <p class="dialog__value-error">Error: {{data.scoreError}}</p>
     </div>
 
-    <p class="dialog__value-total">Total: {{data.scoreSuccess - data.scoreError}}</p>
+    <p class="m-0">Difficulty level: {{data.difficulty.label}}, Bonus: +{{data.difficulty.bonus}}</p>
+
+    <p class="dialog__value-total">Total: {{getScore(data)}}</p>
 
     @if (highScores.length > 0) {
     <div class="highscores">

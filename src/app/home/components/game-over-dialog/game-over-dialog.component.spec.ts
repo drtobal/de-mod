@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameOverDialogComponent } from './game-over-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { GAME_DIFFICULTIES } from '../../constants';
 
 describe('GameOverDialogComponent', () => {
   let component: GameOverDialogComponent;
@@ -16,6 +17,7 @@ describe('GameOverDialogComponent', () => {
             userName: '',
             scoreSucces: 0,
             scoreError: 0,
+            difficulty: GAME_DIFFICULTIES[0],
           },
         },
       ],

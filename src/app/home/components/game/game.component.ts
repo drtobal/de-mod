@@ -5,9 +5,9 @@ import { GameApiService } from '../../services/game-api/game-api.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Input } from '@angular/core';
-import { DEFAULT_DIFFICULT, DEFAULT_USER_NAME, GAME_DIFFICULTIES } from '../../constants';
+import { DEFAULT_DIFFICULT, DEFAULT_USER_NAME } from '../../constants';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Card, GameDifficulty } from '../../types';
+import { Card, DifficultDefinition, GameDifficulty } from '../../types';
 import { CardComponent } from '../card/card.component';
 import { GameOverComponent } from '../game-over/game-over.component';
 import { NewGameButtonComponent } from '../new-game-button/new-game-button.component';
@@ -68,7 +68,7 @@ export class GameComponent implements OnInit, OnDestroy {
   isGameOver: boolean = false;
 
   /** currently difficult of the game */
-  difficulty: GameDifficulty = DEFAULT_DIFFICULT;
+  difficulty: DifficultDefinition = GameStorageService.getDifficulty();
 
   /** subscription to know where to start a new game */
   newGameSub?: Subscription;
@@ -95,9 +95,9 @@ export class GameComponent implements OnInit, OnDestroy {
   loadCards(difficulty: GameDifficulty = DEFAULT_DIFFICULT): void {
     this.resetGame();
     this.loading = true;
-    this.difficulty = difficulty;
+    this.difficulty = GameStorageService.getDifficulty(difficulty);
     this.changeDetectorRef.detectChanges();
-    this.gameApiService.getCards(difficulty).subscribe({
+    this.gameApiService.getCards(this.difficulty.key).subscribe({
       next: data => this.cards = this.gameApiService.generateCardsGame(data.entries),
       error: error => this.httpError = error,
     }).add(() => {
@@ -156,14 +156,8 @@ export class GameComponent implements OnInit, OnDestroy {
     if (this.isGameOver) {
       this.gameStorageService.saveHighScore({
         name: this.userName,
-        score: this.scoreSuccess - this.scoreError,
+        score: this.gameStorageService.getGameScore(this.scoreSuccess, this.scoreError, this.difficulty.bonus),
       });
     }
-  }
-
-  /** displays the current difficult label */
-  getDifficultyLabel(difficulty: GameDifficulty): string {
-    const definition = GAME_DIFFICULTIES.find(f => f.key == difficulty);
-    return definition ? definition.label : DEFAULT_DIFFICULT;
   }
 }

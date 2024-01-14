@@ -44,8 +44,4 @@ describe('GameComponent', () => {
     component.checkIsGameOver();
     expect(component.isGameOver).toBeTrue();
   });
-
-  it('should return the default difficult if the selected is not found', () => {
-    expect(component.getDifficultyLabel('not-exists' as any)).toBe(DEFAULT_DIFFICULT);
-  });
 });

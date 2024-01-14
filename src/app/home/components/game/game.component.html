@@ -1,14 +1,14 @@
 <div class="header">
     <div class="d-flex justify-content-between align-items-center gap-1 gap-md-3 gap-md-4 py-2 container flex-wrap">
         <h1 class="header__name" (click)="resetName.emit()">Hi, {{userName}}</h1>
-        <p class="header__difficulty me-auto">{{getDifficultyLabel(difficulty)}}</p>
+        <p class="header__difficulty me-auto">{{difficulty.label}}</p>
         <div class="score d-flex align-items-center gap-2">
             <p class="score__title">Score:</p>
             <p class="score__value-success">Success: <strong>{{scoreSuccess}}</strong></p>
             <p class="score__value-error">Error: <strong>{{scoreError}}</strong></p>
         </div>
         @defer (on idle) {
-            <app-new-game-button></app-new-game-button>
+        <app-new-game-button></app-new-game-button>
         }
     </div>
 </div>
@@ -30,7 +30,8 @@
 
     @if (isGameOver) {
     @defer(when isGameOver) {
-    <app-game-over [userName]="userName" [scoreSuccess]="scoreSuccess" [scoreError]="scoreError"></app-game-over>
+    <app-game-over [userName]="userName" [scoreSuccess]="scoreSuccess" [scoreError]="scoreError"
+        [difficulty]="difficulty"></app-game-over>
     }
     }
 

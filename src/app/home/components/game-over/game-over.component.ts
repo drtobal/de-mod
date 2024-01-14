@@ -4,7 +4,7 @@ import { DEFAULT_USER_NAME } from '../../constants';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
-import { GameOverDialogData } from '../../types';
+import { DifficultDefinition, GameOverDialogData } from '../../types';
 
 /** used to defer load of the game over dialog and mat dialog styles and source code */
 @Component({
@@ -25,6 +25,9 @@ export class GameOverComponent implements AfterViewInit {
   /** score of the current game */
   @Input() scoreError: number = 0;
 
+  /** difficulty definition of played game */
+  @Input() difficulty?: DifficultDefinition;
+
   /** component constructor */
   constructor(
     readonly matDialog: MatDialog,
@@ -32,11 +35,14 @@ export class GameOverComponent implements AfterViewInit {
 
   /** displays the game over dialog */
   ngAfterViewInit(): void {
-    const data: GameOverDialogData = {
-      userName: this.userName,
-      scoreError: this.scoreError,
-      scoreSuccess: this.scoreSuccess,
-    };
-    this.matDialog.open(GameOverDialogComponent, { data });
+    if (this.difficulty) {
+      const data: GameOverDialogData = {
+        userName: this.userName,
+        scoreError: this.scoreError,
+        scoreSuccess: this.scoreSuccess,
+        difficulty: this.difficulty,
+      };
+      this.matDialog.open(GameOverDialogComponent, { data });
+    }
   }
 }

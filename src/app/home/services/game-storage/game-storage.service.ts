@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../../app/services/util/util.service';
-import { HIGHSCORES_STORAGE, MAX_HIGHSCORES, USER_NAME_STORAGE } from '../../constants';
+import { DEFAULT_DIFFICULT, GAME_DIFFICULTIES, HIGHSCORES_STORAGE, MAX_HIGHSCORES, USER_NAME_STORAGE } from '../../constants';
 import { Subject } from 'rxjs';
-import { GameDifficulty, HighScore } from '../../types';
+import { DifficultDefinition, GameDifficulty, HighScore } from '../../types';
 
 /** this service is to interact with saved data, is a singleton provided to the application */
 @Injectable({
@@ -78,5 +78,14 @@ export class GameStorageService {
       return scores;
     }
     return false;
+  }
+
+  /** get the game score */
+  getGameScore(success: number, error: number, bonus: number): number {
+    return success - error + bonus;
+  }
+
+  static getDifficulty(key: GameDifficulty = DEFAULT_DIFFICULT): DifficultDefinition {
+    return GAME_DIFFICULTIES.find(f => f.key == key) || GAME_DIFFICULTIES[0];
   }
 }

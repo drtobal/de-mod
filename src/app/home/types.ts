@@ -56,6 +56,7 @@ export type GameOverDialogData = {
     userName: String;
     scoreSuccess: number;
     scoreError: number;
+    difficulty: DifficultDefinition;
 };
 
 /** kinds of difficults */
@@ -66,6 +67,7 @@ export type DifficultDefinition = {
     key: GameDifficulty,
     label: string;
     cards: number;
+    bonus: number;
 };
 
 /** high score record */
