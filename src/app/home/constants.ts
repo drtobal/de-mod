@@ -34,18 +34,18 @@ export const GAME_DIFFICULTIES: DifficultDefinition[] = [
         key: gameDifficulties.easy,
         label: 'Easy',
         cards: 8,
-        bonus: 5,
+        bonus: 6,
     },
     {
         key: gameDifficulties.normal,
         label: 'Normal',
         cards: 14,
-        bonus: 10
+        bonus: 15
     },
     {
         key: gameDifficulties.hard,
         label: 'Hard',
         cards: 20,
-        bonus: 20,
+        bonus: 25,
     },
 ];
