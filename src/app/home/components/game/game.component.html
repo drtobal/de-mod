@@ -21,7 +21,7 @@
     <p class="error-text" [@fade]>{{httpError.message}}</p>
     } @else {
 
-    <div class="d-flex gap-4 flex-wrap" [@fade]>
+    <div class="d-flex gap-4 flex-wrap" [@cards]="cards.length">
         @for (card of cards; track card.meta.uuid; let index = $index) {
         <app-card [card]="card" [visible]="isCardVisible(index)" (click)="showCard(index)"></app-card>
         }

@@ -14,7 +14,7 @@ import { NewGameButtonComponent } from '../new-game-button/new-game-button.compo
 import { GameStorageService } from '../../services/game-storage/game-storage.service';
 import { Subscription } from 'rxjs';
 import { LoadingComponent } from '../loading/loading.component';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { TRANSITION_ENTER, TRANSITION_EXIT_PERMANENT } from '../../../app/constants';
 
 const FADE_IN = style({ opacity: 0 });
@@ -33,6 +33,14 @@ const FADE_OUT = style({ opacity: 1 });
     trigger('fade', [
       transition(':enter', [FADE_IN, animate(TRANSITION_ENTER, FADE_OUT)]),
       transition(':leave', [FADE_OUT, animate(TRANSITION_EXIT_PERMANENT, FADE_IN)]),
+    ]),
+    trigger('cards', [
+      transition('* => *', [ // each time the binding value changes
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(2rem)' }),
+          stagger(50, [animate(TRANSITION_ENTER, style({ opacity: 1, transform: 'none' }))]),
+        ], { optional: true }),
+      ]),
     ]),
   ],
 })
