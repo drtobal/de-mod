@@ -2,11 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
 
-Athor: Cristóbal Díaz Álvarez - diazalvarezcristobal@gmail.com
+Author: Cristóbal Díaz Álvarez - diazalvarezcristobal@gmail.com
+
+Demo: https://cristobaldiaz.cl/fe-mod/
+
+Additional features:
+- Difficulty levels
+- Start a new game
+- Edit user name by clicking in it
+- Highscores record
+
+All tests passing!
 
 ## Development server
 
 Run `npm install` to install dependences
+
+Install Angular Cli globally -> https://angular.io/cli `npm install -g @angular/cli`
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 You need angular cli to run `ng` command https://angular.io/cli
