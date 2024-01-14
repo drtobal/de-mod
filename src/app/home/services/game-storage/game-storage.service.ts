@@ -58,21 +58,25 @@ export class GameStorageService {
   /** save a new high score */
   saveHighScore(score: HighScore): void {
     if (this.utilService.hasWindow()) {
-      let scores = this.getHighScores();
-      if (scores.find(s => s.score < score.score) || scores.length <= MAX_HIGHSCORES) { //only save if it is higher
-        scores.push(score);
-        scores = scores.slice(-MAX_HIGHSCORES);
-        scores = scores.sort((a, b) => {
-          if (a.score < b.score) {
-            return 1;
-          }
-          if (a.score > b.score) {
-            return -1;
-          }
-          return 0;
-        });
+      let scores = this.addHighScore(this.getHighScores(), score);
+      if (scores !== false) {
         window.localStorage.setItem(HIGHSCORES_STORAGE, JSON.stringify(scores));
       }
     }
+  }
+
+  /** add and sort higscores, false it the scores array is unchanged */
+  addHighScore(scores: HighScore[], score: HighScore, maxItems: number = MAX_HIGHSCORES): HighScore[] | false {
+    if (scores.length <= maxItems || scores.find(s => s.score <= score.score)) { // only save if it is higher
+      scores.push(score);
+      scores = scores.sort((a, b) => { // sort by score value, higher is first
+        if (a.score < b.score) return 1;
+        if (a.score > b.score) return -1;
+        return 0;
+      });
+      scores = scores.slice(0, maxItems);
+      return scores;
+    }
+    return false;
   }
 }
