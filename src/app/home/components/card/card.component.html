@@ -3,7 +3,7 @@
     <div class="card__back-face"></div>
     <div class="card__front-face">
         @if (visible) {
-        <div class="card__image" [ngStyle]="getCardImage(card)">
+        <div class="card__image" [@fadeOut] [ngStyle]="getCardImage(card)">
             <p class="card__title">{{card.meta.name}}</p>
         </div>
         }
