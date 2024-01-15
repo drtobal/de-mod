@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Congratulations {{data.userName}}!</h1>
-<div mat-dialog-content class="dialog d-flex flex-column gap-2 p-4">
+<div mat-dialog-content class="dialog d-flex flex-column gap-2 p-4 w-100">
     <h2 class="dialog__caption">Your score:</h2>
     <div class="d-flex gap-2 justify-content-center">
         <p class="dialog__value-success">Success: {{data.scoreSuccess}}</p>
@@ -11,19 +11,19 @@
     <p class="dialog__value-total">Total: {{getScore(data)}}</p>
 
     @if (highScores.length > 0) {
-    <div class="highscores">
+    <div class="highscores w-100">
         <p class="highscores__title">Highscores</p>
         @for (highScore of highScores; track index; let index = $index) {
         <div class="d-flex gap-4">
-            <p class="highscores__score me-auto">
-                {{highScore.name}}
+            <p class="highscores__score me-auto d-flex">
+                <span class="text-truncate">{{highScore.name}}</span>
                 @switch (index) {
                     @case (0) { 🥇 }
                     @case (1) { 🥈 }
                     @case (2) { 🥉 }
                 }
             </p>
-            <p class="highscores__score">{{highScore.score | number : '1.0-0'}}</p>
+            <p class="highscores__score-value">{{highScore.score | number : '1.0-0'}}</p>
         </div>
         }
     </div>

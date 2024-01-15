@@ -39,5 +39,10 @@
 .highscores {
     &__score {
         margin: 0;
+        min-width: 0;
+
+        &-value {
+            margin: 0;
+        }
     }
 }
