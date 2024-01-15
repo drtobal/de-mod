@@ -4,13 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Author: Cristóbal Díaz Álvarez - diazalvarezcristobal@gmail.com
 
-Demo: https://cristobaldiaz.cl/fe-mod/
+Demo: https://cristobaldiaz.cl/fe-mod/ - Deployed with firebase
 
 Additional features:
 - Difficulty levels
 - Start a new game
 - Edit user name by clicking in it
 - Highscores record
+- Playable with keyboard tab + enter or space key
 
 All tests passing!
 
