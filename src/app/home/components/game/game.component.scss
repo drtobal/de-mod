@@ -37,3 +37,25 @@
 .error-text {
     color: $error-text;
 }
+
+.card-game-over {
+    animation: game-card-game-over .6s linear;
+}
+
+@keyframes game-card-game-over {
+    0% {
+        transform: translateY(0) rotateY(0);
+    }
+    25% {
+        transform: translateY(0) rotateY(90deg);
+    }
+    50% {
+        transform: translateY(-1rem) rotateY(0);
+    }
+    75% {
+        transform: translateY(0) rotateY(90deg);
+    }
+    100% {
+        transform: translateY(0) rotateY(0);
+    }
+}

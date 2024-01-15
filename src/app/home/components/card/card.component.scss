@@ -65,7 +65,7 @@
     }
 
     &--is-dancing {
-        animation: game-card-dancing 1.5s ease-in-out 1s infinite;
+        animation: game-card-dancing 1s linear 1s infinite;
     }
 }
 
@@ -117,13 +117,16 @@
 
 @keyframes game-card-dancing {
     0% {
-        transform: rotateZ(-6deg) rotateY(180deg);
+        transform: rotateZ(0) rotateY(180deg);
     }
-    50% {
-        transform: rotateZ(6deg) rotateY(180deg);
+    25% {
+        transform: rotateZ(-4deg) rotateY(180deg);
+    }
+    75% {
+        transform: rotateZ(4deg) rotateY(180deg);
     }
     100% {
-        transform: rotateZ(-6deg) rotateY(180deg);
+        transform: rotateZ(0) rotateY(180deg);
     }
 }
 

@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Input } from '@angular/core';
 import { DEFAULT_DIFFICULT, DEFAULT_USER_NAME } from '../../constants';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Card, DifficultDefinition, GameDifficulty } from '../../types';
+import { AnyObject, Card, DifficultDefinition, GameDifficulty } from '../../types';
 import { CardComponent } from '../card/card.component';
 import { GameOverComponent } from '../game-over/game-over.component';
 import { NewGameButtonComponent } from '../new-game-button/new-game-button.component';
@@ -35,7 +35,7 @@ const FADE_OUT = style({ opacity: 1 });
       transition(':leave', [FADE_OUT, animate(TRANSITION_EXIT_PERMANENT, FADE_IN)]),
     ]),
     trigger('cards', [
-      transition('* => *', [ // each time the binding value changes
+      transition('* => *', [
         query(':enter', [
           style({ opacity: 0, transform: 'translateY(2rem)' }),
           stagger(50, [animate(TRANSITION_ENTER, style({ opacity: 1, transform: 'none' }))]),
@@ -172,5 +172,10 @@ export class GameComponent implements OnInit, OnDestroy {
         score: this.gameStorageService.getGameScore(this.scoreSuccess, this.scoreError, this.difficulty.bonus),
       });
     }
+  }
+
+  /** get card animation delay styles to trigger stagger when game is completed */
+  getCardAnimationDelay(index: number): AnyObject {
+    return { 'animation-delay': `${index * 50}ms` };
   }
 }
