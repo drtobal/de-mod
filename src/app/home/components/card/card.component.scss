@@ -7,7 +7,7 @@
 .card {
     width: 7rem;
     height: 9rem;
-    border-radius: map-get($map: $border-radius, $key: 3);
+    border-radius: map-get($map: $border-radius, $key: 2);
     box-shadow: $box-shadow-4dp;
     transition: transform $transition-duration-complex $standard-curve-timing-function;
     transform-style: preserve-3d;
@@ -160,7 +160,8 @@
 
 @media (min-width: map-get($map: $grid-breakpoints, $key: md)) {
     .card {
-        width: 11rem;
-        height: 14rem;
+        width: 9rem;
+        height: 11rem;
+        border-radius: map-get($map: $border-radius, $key: 3);
     }
 }
