@@ -1,7 +1,8 @@
 <div class="header">
     <div class="d-flex justify-content-between align-items-center gap-1 gap-md-3 gap-md-4 py-2 container flex-wrap">
-        <h1 class="header__name d-flex gap-2" (click)="resetName.emit()">Hi,<span
-                class="text-truncate">{{userName}}</span>✏️</h1>
+        <h1 class="header__name d-flex gap-2" (click)="resetName.emit()" role="button" tabindex="0">Hi,<span
+                class="text-truncate" (keyup.enter)="resetName.emit()"
+                (keyup.space)="resetName.emit()">{{userName}}</span>✏️</h1>
         <p class="header__difficulty me-auto">{{difficulty.label}}</p>
         <div class="score d-flex align-items-center gap-2">
             <p class="score__title">Score:</p>
@@ -25,8 +26,9 @@
     <div class="d-flex gap-4 flex-wrap" [@cards]="cards.length">
         @for (card of cards; track card.meta.uuid; let index = $index) {
         <app-card [card]="card" [visible]="isCardVisible(index)" [completed]="isCardCompleted(index)"
-            [ngStyle]="getCardAnimationDelay(index)" [isGameOver]="isGameOver"
-            [ngClass]="{'card-game-over': isGameOver}" (click)="showCard(index)"></app-card>
+            [ngStyle]="getCardAnimationDelay(index)" [isGameOver]="isGameOver" [tabindex]="index + 5" role="button"
+            [ngClass]="{'card-game-over': isGameOver}" (click)="showCard(index)" (keyup.enter)="showCard(index)"
+            (keyup.space)="showCard(index)"></app-card>
         }
     </div>
 
