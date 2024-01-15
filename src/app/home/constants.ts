@@ -45,12 +45,12 @@ export const GAME_DIFFICULTIES: DifficultDefinition[] = [
         key: gameDifficulties.normal,
         label: 'Normal',
         cards: 14,
-        bonus: 21,
+        bonus: 28,
     },
     {
         key: gameDifficulties.hard,
         label: 'Hard',
         cards: 20,
-        bonus: 40,
+        bonus: 60,
     },
 ];
