@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { NewGameDialogContainerComponent } from '../new-game-dialog-container/new-game-dialog-container.component';
 
@@ -13,6 +13,9 @@ import { NewGameDialogContainerComponent } from '../new-game-dialog-container/ne
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewGameButtonComponent {
+  /** custom tab index for button */
+  @Input() btnTabindex: number = 1;
+
   /** check if it is displaying the dialog */
   hasDialog: boolean = false;
 

@@ -1,4 +1,4 @@
-<button mat-button (click)="displayDialog()">New Game</button>
+<button tabindex="{{btnTabindex}}" mat-button (click)="displayDialog()">New Game</button>
 @if (hasDialog) {
 @defer (when hasDialog) {
 <app-new-game-dialog-container (dialogDisplayed)="removeDialog()"></app-new-game-dialog-container>
