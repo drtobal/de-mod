@@ -13,9 +13,16 @@
     @if (highScores.length > 0) {
     <div class="highscores">
         <p class="highscores__title">Highscores</p>
-        @for (highScore of highScores; track $index) {
+        @for (highScore of highScores; track index; let index = $index) {
         <div class="d-flex gap-4">
-            <p class="highscores__score me-auto">{{highScore.name}}</p>
+            <p class="highscores__score me-auto">
+                @switch (index) {
+                    @case (0) { 🥇 }
+                    @case (1) { 🥈 }
+                    @case (2) { 🥉 }
+                }
+                {{highScore.name}}
+            </p>
             <p class="highscores__score">{{highScore.score | number : '1.0-0'}}</p>
         </div>
         }
