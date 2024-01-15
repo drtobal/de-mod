@@ -28,24 +28,29 @@ export const DEFAULT_CARDS = 20;
 /** hard is default difficult */
 export const DEFAULT_DIFFICULT = gameDifficulties.hard;
 
-/** list of all available difficulties in array format */
+/**
+ * list of all available difficulties in array format
+ * the idea of a fun game is harder levels give more points,
+ * so the bonus is higher at higher difficulties
+ * bonusses could be tunned
+ * */
 export const GAME_DIFFICULTIES: DifficultDefinition[] = [
     {
         key: gameDifficulties.easy,
         label: 'Easy',
         cards: 8,
-        bonus: 6,
+        bonus: 8,
     },
     {
         key: gameDifficulties.normal,
         label: 'Normal',
         cards: 14,
-        bonus: 15
+        bonus: 21,
     },
     {
         key: gameDifficulties.hard,
         label: 'Hard',
         cards: 20,
-        bonus: 25,
+        bonus: 40,
     },
 ];
